@@ -16,11 +16,20 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.room.Room
+import com.shinepond.composetutorial.common.db.UserDatabase
+import com.shinepond.composetutorial.common.db.user.User
 import com.shinepond.composetutorial.ui.theme.ComposeTutorialTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val newUser = User("shinepond", "27", "010-1111-5555")
+
+        val db = UserDatabase.getInstance(applicationContext)
+        db!!.userDao().insert(newUser)
+
         setContent {
             ComposeTutorialTheme {
                 // A surface container using the 'background' color from the theme
